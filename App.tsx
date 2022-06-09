@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
@@ -7,11 +7,24 @@ export default function App() {
   // variable, arrays, objects
   // var name = "TestName";
   const [name, setName] = useState("testing");
+  const [counter, setCounter] = useState(0);
 
-  const HandleNameChange = () => {
-    setName("Qais");
-    console.log("hello" + name);
-  };
+  const SayHello = useCallback(
+    () => {
+      console.log("hello" + name);
+      console.log("counter", counter);
+    },
+    [name, counter]
+  );
+
+  const HandleNameChange = useCallback(
+    () => {
+      setName("Qais");
+      setCounter(counter + 1);
+      SayHello();
+    },
+    [setName, setCounter, counter]
+  );
 
   return (
     <View style={styles.container}>
@@ -24,7 +37,7 @@ export default function App() {
         }}
       /> */}
       <Text>
-        {name}
+        {name} {counter}
       </Text>
       <Button title="Hello" onPress={HandleNameChange} />
       <StatusBar style="auto" />
