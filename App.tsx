@@ -7,6 +7,8 @@ export default function App() {
   // variable, arrays, objects
   // var name = "TestName";
   const [name, setName] = useState("testing");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [counter, setCounter] = useState(0);
 
   const SayHello = useCallback(
@@ -26,20 +28,43 @@ export default function App() {
     [setName, setCounter, counter]
   );
 
+  const HandleSubmit = useCallback(
+    () => {
+      console.log(firstName, lastName);
+    },
+    [firstName, lastName]
+  );
+
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
-      {/* <TextInput
+      <TextInput
         style={{
           // height: 100,
           width: 200,
-          backgroundColor: "gray"
+          backgroundColor: "gray",
+          fontSize: 40,
+          color: "white"
         }}
-      /> */}
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+      <TextInput
+        style={{
+          // height: 100,
+          width: 200,
+          backgroundColor: "gray",
+          fontSize: 40,
+          color: "white"
+        }}
+        value={lastName}
+        onChangeText={txt => setlastName(txt)}
+      />
       <Text>
         {name} {counter}
       </Text>
-      <Button title="Hello" onPress={HandleNameChange} />
+      {/* <Button title="Hello" onPress={HandleNameChange} /> */}
+      <Button title="Submit" onPress={HandleSubmit} />
       <StatusBar style="auto" />
     </View>
   );
