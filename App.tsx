@@ -7,6 +7,12 @@ export default function App() {
   // variable, arrays, objects
   // var name = "TestName";
   const [name, setName] = useState("testing");
+
+  const HandleNameChange = () => {
+    setName("Qais");
+    console.log("hello" + name);
+  };
+
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
@@ -20,15 +26,7 @@ export default function App() {
       <Text>
         {name}
       </Text>
-      <Button
-        title="Hello"
-        onPress={() => {
-          // console.log("hello world");
-          // name = "shahzaib"
-          setName("shahzaib");
-          console.log(name);
-        }}
-      />
+      <Button title="Hello" onPress={HandleNameChange} />
       <StatusBar style="auto" />
     </View>
   );
